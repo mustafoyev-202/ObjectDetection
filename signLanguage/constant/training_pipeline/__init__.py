@@ -7,7 +7,7 @@ DATA_INGESTION_DIR_NAME: str = "data_ingestion"
 
 DATA_INGESTION_FEATURE_STORE_DIR: str = "feature_store"
 
-DATA_DOWNLOAD_URL: str = "https://github.com/mustafoyev-202/ObjectDetection/raw/main/SignLanguage.v4i.yolov5pytorch.zip"
+DATA_DOWNLOAD_URL: str = "https://github.com/mustafoyev-202/ObjectDetection/raw/main/Sign_language_data.zip"
 
 """
 Data Validation related constant start with DATA_VALIDATION VAR NAME
@@ -26,9 +26,9 @@ MODEL_TRAINER_DIR_NAME: str = "model_trainer"
 
 MODEL_TRAINER_PRETRAINED_WEIGHT_NAME: str = "yolov5s.pt"
 
-MODEL_TRAINER_NO_EPOCHS: int = 1
+MODEL_TRAINER_NO_EPOCHS: int = 6
 
-MODEL_TRAINER_BATCH_SIZE: int = 16
+MODEL_TRAINER_BATCH_SIZE: int = 8
 
 """
 MODEL PUSHER related constant start with MODEL_PUSHER var name

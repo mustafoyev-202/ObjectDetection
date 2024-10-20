@@ -19,8 +19,8 @@ class TrainPipeline:
         self.data_ingestion_config = DataIngestionConfig()
         self.data_validation_config = DataValidationConfig()
         self.model_trainer_config = ModelTrainerConfig()
-        #self.model_pusher_config = ModelPusherConfig()
-        # self.s3_operation = S3Operation()
+        self.model_pusher_config = ModelPusherConfig()
+        self.s3_operation = S3Operation()
 
     def start_data_ingestion(self) -> DataIngestionArtifact:
         try:
@@ -77,18 +77,18 @@ class TrainPipeline:
         except Exception as e:
             raise SignException(e, sys)
 
-    # def start_model_pusher(self, model_trainer_artifact: ModelTrainerArtifact, s3: S3Operation):
-    #     try:
-    #         model_pusher = ModelPusher(
-    #             model_pusher_config=self.model_pusher_config,
-    #             model_trainer_artifact=model_trainer_artifact,
-    #             s3=s3
-    #
-    #         )
-    #         model_pusher_artifact = model_pusher.initiate_model_pusher()
-    #         return model_pusher_artifact
-    #     except Exception as e:
-    #         raise SignException(e, sys)
+    def start_model_pusher(self, model_trainer_artifact: ModelTrainerArtifact, s3: S3Operation):
+        try:
+            model_pusher = ModelPusher(
+                model_pusher_config=self.model_pusher_config,
+                model_trainer_artifact=model_trainer_artifact,
+                s3=s3
+
+            )
+            model_pusher_artifact = model_pusher.initiate_model_pusher()
+            return model_pusher_artifact
+        except Exception as e:
+            raise SignException(e, sys)
 
     def run_pipeline(self) -> None:
         try:
@@ -99,8 +99,8 @@ class TrainPipeline:
 
             if data_validation_artifact.validation_status == True:
                 model_trainer_artifact = self.start_model_trainer()
-                # model_pusher_artifact = self.start_model_pusher(model_trainer_artifact=model_trainer_artifact,
-                #                                                 s3=self.s3_operation)
+                model_pusher_artifact = self.start_model_pusher(model_trainer_artifact=model_trainer_artifact,
+                                                                s3=self.s3_operation)
 
 
             else:

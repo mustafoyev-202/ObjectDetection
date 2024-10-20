@@ -35,3 +35,4 @@ MODEL PUSHER related constant start with MODEL_PUSHER var name
 """
 BUCKET_NAME = "sign-language-2024"
 S3_MODEL_NAME = "best.pt"
+
